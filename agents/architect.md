@@ -72,13 +72,32 @@ src/
 
 ## Build order (phases)
 
-1. **Foundation**: `next.config.ts`, `globals.css`, `layout.tsx`, Firebase client, `.env.local`, types
-2. **Data layer**: `src/lib/data/restaurants.ts`, `src/lib/data/categories.ts`
-3. **Homepage components**: HeroSection → CategoryTiles → FeaturedGrid → skeletons → `page.tsx`
-4. **SEO files**: `opengraph-image.tsx`, `sitemap.ts`, `robots.ts`, `structured-data.ts`
-5. **Layout chrome**: Header, Footer, MobileMenu
-6. **Quality**: empty states, Rich Results Test, Lighthouse mobile >90
-7. **Future**: individual restaurant pages, colonia pages, category pages, map view
+1. **Foundation** ✅ — `next.config.ts`, `globals.css`, `layout.tsx`, Firebase client, `.env.local`, types
+2. **Data layer** ✅ (mock) — `src/lib/data/restaurants.ts` con 6 funciones mock; conectar Firestore cuando haya credenciales
+3. **Homepage** (parcial) ✅ — `HeroSection` lista; pendiente `CategoryTiles`, `FeaturedGrid`, skeletons
+4. **Restaurantes hub** ✅ — `/restaurantes` con filtros, `/restaurantes/[slug]` con página individual
+5. **SEO files** — `opengraph-image.tsx`, `sitemap.ts`, `robots.ts`, `structured-data.ts`
+6. **Layout chrome** — Header, MobileMenu; Footer ✅
+7. **Quality** — empty states, Rich Results Test, Lighthouse mobile >90
+8. **Future** — colonia pages, category pages, map view, admin panel
+
+## Critical runtime data patterns (learned in production)
+
+- **`@theme` vs `@theme inline`**: usar siempre `@theme` (sin `inline`). Con `inline`, las CSS custom properties NO se emiten a `:root` y `var(--color-*)` falla en CSS raw.
+- **`params` en rutas dinámicas**: es runtime data. Fix: `generateStaticParams` para rutas conocidas. Esto convierte `params` en build-time.
+- **`searchParams`**: es runtime data. Fix: nunca awaitearlo en el page component directamente. Moverlo a un componente hijo (`XxxContent`) que se pasa como prop `Promise<...>` y se awaitea dentro, envuelto en `<Suspense>`.
+- **Patrón Suspense correcto**:
+  ```tsx
+  // page.tsx — NO awaitea runtime data
+  export default function Page({ searchParams }) {
+    return <Suspense fallback={<Skeleton />}><Content searchParams={searchParams} /></Suspense>
+  }
+  // Content.tsx — awaitea adentro
+  export default async function Content({ searchParams }) {
+    const { filter } = await searchParams
+    // ...
+  }
+  ```
 
 ## When producing a new plan
 
