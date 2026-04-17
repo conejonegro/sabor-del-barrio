@@ -73,7 +73,7 @@ src/
 ## Build order (phases)
 
 1. **Foundation** ✅ — `next.config.ts`, `globals.css`, `layout.tsx`, Firebase client, `.env.local`, types
-2. **Data layer** ✅ (mock) — `src/lib/data/restaurants.ts` con 6 funciones mock; conectar Firestore cuando haya credenciales
+2. **Data layer** ✅ — Firestore real con `use cache` en 7 funciones; seed script en `scripts/seed.ts`; índices compuestos pendientes de crear en consola
 3. **Homepage** (parcial) ✅ — `HeroSection` lista; pendiente `CategoryTiles`, `FeaturedGrid`, skeletons
 4. **Restaurantes hub** ✅ — `/restaurantes` con filtros, `/restaurantes/[slug]` con página individual
 5. **SEO files** — `opengraph-image.tsx`, `sitemap.ts`, `robots.ts`, `structured-data.ts`

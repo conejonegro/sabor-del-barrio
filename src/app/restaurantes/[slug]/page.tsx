@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getRestaurantBySlug, getFeaturedRestaurants } from "@/lib/data/restaurants";
+import { getRestaurantBySlug, getAllRestaurantSlugs } from "@/lib/data/restaurants";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const restaurants = await getFeaturedRestaurants();
-  return restaurants.map((r) => ({ slug: r.slug }));
+  return getAllRestaurantSlugs();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -1,5 +1,3 @@
-import type { Timestamp } from "firebase/firestore";
-
 export interface Restaurant {
   id: string;
   name: string;
@@ -22,8 +20,8 @@ export interface Restaurant {
   hours?: string;
   phone?: string;
   instagram?: string;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export interface Category {

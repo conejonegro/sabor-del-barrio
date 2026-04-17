@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex items-center justify-center min-h-[90vh] bg-black overflow-hidden">
+    <section className="relative flex items-center justify-center min-h-screen bg-black overflow-hidden">
       {/* Star/grid texture */}
       <div
         className="absolute inset-0 opacity-15"
@@ -39,7 +39,7 @@ export default function HeroSection() {
             Explorar Restaurantes
           </Link>
           <Link
-            href="/colonias"
+            href="/restaurantes?filter=colonia"
             className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/40 text-white font-sans font-semibold text-base hover:bg-white/10 transition-colors duration-200"
           >
             Ver por Colonia

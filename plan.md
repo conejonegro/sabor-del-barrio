@@ -16,10 +16,12 @@ Stack: Next.js 16 + Firebase + Tailwind v4 + TypeScript
 
 ---
 
-## Fase 2 — Data Layer ✅ (mock)
+## Fase 2 — Data Layer ✅
 
-- [x] `src/lib/data/restaurants.ts` — mock data + funciones: `getLatestRestaurants`, `getFeaturedRestaurants`, `getAdminPickRestaurants`, `getRestaurantsByColonia`, `getRestaurantsByPlatillo`, `getRestaurantBySlug`, `getAllRestaurantSlugs`
-- [ ] Conectar a Firestore real (requiere `.env.local` con credenciales Firebase)
+- [x] `src/lib/data/restaurants.ts` — Firestore real + `use cache` en todas las funciones
+- [x] `.env.local` — credenciales Firebase configuradas
+- [x] `scripts/seed.ts` — sembrar restaurantes iniciales (`dotenv -e .env.local -- npx tsx scripts/seed.ts`)
+- [ ] Crear índices compuestos en Firestore console (ver `features/firebase-firestore-connection.md`)
 - [ ] `src/lib/data/categories.ts` — `getCategories()`
 
 ---

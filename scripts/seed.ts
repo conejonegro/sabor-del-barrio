@@ -1,0 +1,223 @@
+// Run with: npx tsx scripts/seed.ts
+import { config } from "dotenv";
+import { resolve } from "path";
+config({ path: resolve(process.cwd(), ".env.local") });
+
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  setDoc,
+  doc,
+  Timestamp,
+} from "firebase/firestore";
+
+const app = initializeApp({
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+});
+
+const db = getFirestore(app);
+const now = Timestamp.now();
+
+const restaurants = [
+  {
+    id: "la-birreria-de-don-beto",
+    name: "La Birriería de Don Beto",
+    slug: "la-birreria-de-don-beto",
+    description:
+      "Más de 30 años sirviendo la mejor birria de res en Guadalajara. Caldo rojo oscuro, carne suave y tortillas de maíz recién hechas. Un clásico del barrio que no falla.",
+    colonia: "Analco",
+    coloniaRef: "analco",
+    platillos: ["Birria de res", "Consomé", "Quesabirria", "Tostadas de birria"],
+    platilloPrimary: "Birria de res",
+    photos: [],
+    coverPhoto: "",
+    address: "Calle Moctezuma 234, Analco, Guadalajara, Jalisco",
+    coords: { lat: 20.6597, lng: -103.3496 },
+    adminPick: true,
+    featured: true,
+    featuredOrder: 1,
+    hours: "Sáb–Dom 8:00am – 2:00pm",
+    phone: "33 1234 5678",
+    instagram: "@birreria_don_beto",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "las-tortas-de-la-barda",
+    name: "Las Tortas de la Barda",
+    slug: "las-tortas-de-la-barda",
+    description:
+      "El puesto favorito de los tapatíos para la torta ahogada auténtica. Birote salado bañado en salsa de chile de árbol, con carnitas o lomo.",
+    colonia: "Santa Tere",
+    coloniaRef: "santa-tere",
+    platillos: ["Torta ahogada", "Torta media ahogada", "Agua de horchata"],
+    platilloPrimary: "Torta ahogada",
+    photos: [],
+    coverPhoto: "",
+    address: "Av. Federalismo Norte 456, Santa Tere, Guadalajara, Jalisco",
+    coords: { lat: 20.6845, lng: -103.3501 },
+    adminPick: false,
+    featured: true,
+    featuredOrder: 2,
+    hours: "Lun–Sáb 9:00am – 4:00pm",
+    phone: "33 9876 5432",
+    instagram: "@tortasdelabarda",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "tacos-el-guero",
+    name: "Tacos El Güero",
+    slug: "tacos-el-guero",
+    description:
+      "Tacos de canasta, de guisado y al pastor en el corazón de Chapultepec. El favorito de la noche para los que salen del trabajo.",
+    colonia: "Chapultepec",
+    coloniaRef: "chapultepec",
+    platillos: ["Tacos al pastor", "Tacos de canasta", "Quesadilla", "Agua fresca"],
+    platilloPrimary: "Tacos al pastor",
+    photos: [],
+    coverPhoto: "",
+    address: "Av. Chapultepec 789, Guadalajara, Jalisco",
+    coords: { lat: 20.6736, lng: -103.3741 },
+    adminPick: true,
+    featured: true,
+    featuredOrder: 3,
+    hours: "Lun–Dom 7:00pm – 2:00am",
+    phone: "33 5555 1234",
+    instagram: "@tacosElGuero",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "tortas-tono-providencia",
+    name: "Tortas Toño",
+    slug: "tortas-tono-providencia",
+    description:
+      "Una de las cadenas más queridas de Guadalajara. Nacieron en 1990 como un pequeño puesto en la colonia Providencia y hoy son famosas por permitirte 'ahogar' tu torta a tu gusto en su barra de salsas. Su birote crujiente y la calidad de las carnitas las han convertido en un clásico obligado.",
+    colonia: "Providencia",
+    coloniaRef: "providencia",
+    platillos: ["Torta combinada de lengua, buche y pancita", "Taco dorado", "Agua de horchata de fresa"],
+    platilloPrimary: "Torta combinada de lengua, buche y pancita",
+    photos: [],
+    coverPhoto: "",
+    address: "Tierra del Fuego 3160-2, Providencia, Guadalajara, Jalisco",
+    coords: { lat: 20.6856, lng: -103.3820 },
+    adminPick: false,
+    featured: true,
+    featuredOrder: 1,
+    hours: "Lun–Dom 8:00am – 10:00pm",
+    phone: "33 0000 0000",
+    instagram: "@tortastono",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "ahogadas-betos",
+    name: "Ahogadas Betos",
+    slug: "ahogadas-betos",
+    description:
+      "Considerada por los usuarios como una de las mejores de la ciudad, con más de 2,900 reseñas. Es un puesto familiar con más de 20 años de tradición donde preparan las tortas con 'consomé y harto amor'. Su salsa logra el equilibrio perfecto entre sabor e intensidad.",
+    colonia: "Ladrón de Guevara",
+    coloniaRef: "ladron-de-guevara",
+    platillos: ["Torta ahogada de carnitas", "Torta de pierna", "Agua fresca"],
+    platilloPrimary: "Torta ahogada de carnitas",
+    photos: [],
+    coverPhoto: "",
+    address: "Pedro Antonio Buzeta 757, Ladrón de Guevara, 44600 Guadalajara, Jalisco",
+    coords: { lat: 20.6710, lng: -103.3775 },
+    adminPick: true,
+    featured: false,
+    featuredOrder: 0,
+    hours: "Dom–Lun 9:00am – 3:45pm",
+    phone: "33 0000 0000",
+    instagram: "@ahogadasbetos",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "el-profe-jimenez",
+    name: "Tortas Ahogadas El Profe Jiménez",
+    slug: "el-profe-jimenez",
+    description:
+      "En el corazón del barrio de Santa Tere, este negocio familiar es famoso por ir más allá de la torta tradicional. El 'Profe' ofrece creaciones únicas como 'El Destruido' (tacos dorados destrozados con carne) o 'El Borrador' (un mollete estilo torta ahogada). Un lugar para los que buscan probar algo diferente sin perder la esencia tapatía.",
+    colonia: "Santa Tere",
+    coloniaRef: "santa-tere",
+    platillos: ["El Destruido", "El Borrador", "Tacos blanditos de carnitas y panela"],
+    platilloPrimary: "El Destruido",
+    photos: [],
+    coverPhoto: "",
+    address: "Andrés Terán 841, Villaseñor, 44170 Guadalajara, Jalisco",
+    coords: { lat: 20.6543, lng: -103.3456 },
+    adminPick: true,
+    featured: false,
+    featuredOrder: 0,
+    hours: "Lun y Mié–Dom 8:00am – 3:00pm (Mar Cierra)",
+    phone: "33 0000 0000",
+    instagram: "@elprofejimenez",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "tortas-felipe-del-santuario",
+    name: "Tortas Felipe del Santuario",
+    slug: "tortas-felipe-del-santuario",
+    description:
+      "Un ícono en el mismísimo centro de Guadalajara, a un lado del Santuario. Famosa por sus tortas estilo santuario y por ser punto de encuentro tanto para locales como turistas que buscan una experiencia auténtica y rápida. También sirven pozole, tostadas y quesadillas.",
+    colonia: "Centro",
+    coloniaRef: "centro",
+    platillos: ["Torta Estilo Santuario", "Pozole", "Tostadas"],
+    platilloPrimary: "Torta Estilo Santuario",
+    photos: [],
+    coverPhoto: "",
+    address: "Calle Pedro Loza 513, Zona Centro, 44200 Guadalajara, Jalisco",
+    coords: { lat: 20.6761, lng: -103.3472 },
+    adminPick: false,
+    featured: true,
+    featuredOrder: 2,
+    hours: "Lun–Dom 1:00pm – 10:30pm",
+    phone: "33 0000 0000",
+    instagram: "@tortasfelipe",
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: "principe-heredero",
+    name: "Tortas Ahogadas El Príncipe Heredero",
+    slug: "principe-heredero",
+    description:
+      "Con más de 60 años de historia, también conocidas como 'las de Sears', son una joya de la tradición tapatía. Se especializan únicamente en torta de pierna: con frijoles refritos, ahogada en una salsa excepcionalmente equilibrada y servida con cebolla desflemada. Sencillez y tradición en cada bocado.",
+    colonia: "Mexicaltzingo",
+    coloniaRef: "mexicaltzingo",
+    platillos: ["Torta de pierna ahogada", "Tacos dorados de papa", "Tacos dorados de frijol"],
+    platilloPrimary: "Torta de pierna ahogada",
+    photos: [],
+    coverPhoto: "",
+    address: "Epigmenio González 200, Mexicaltzingo, 44170 Guadalajara, Jalisco",
+    coords: { lat: 20.6538, lng: -103.3489 },
+    adminPick: false,
+    featured: false,
+    featuredOrder: 0,
+    hours: "Lun–Sáb 9:00am – 3:00pm",
+    phone: "33 0000 0000",
+    instagram: "@principeheredero",
+    createdAt: now,
+    updatedAt: now,
+  },
+];
+
+async function seed() {
+  const col = collection(db, "restaurants");
+  for (const r of restaurants) {
+    await setDoc(doc(col, r.id), r);
+    console.log(`✓ Seeded: ${r.name}`);
+  }
+  console.log("\nDone. Remember to create composite indexes in Firestore console.");
+}
+
+seed().catch(console.error);

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#1A1A1A"/>
+
+  <!-- Taco shell (half circle) -->
+  <path d="M5 22 Q16 6 27 22 Z" fill="#F39C12"/>
+
+  <!-- Filling - meat -->
+  <path d="M9 22 Q16 10 23 22" fill="#C0392B" opacity="0.9"/>
+
+  <!-- Filling - lettuce/green -->
+  <path d="M11 22 Q14 15 17 22" fill="#27AE60" opacity="0.85"/>
+
+  <!-- Shell bottom edge -->
+  <path d="M5 22 Q16 26 27 22" fill="#E67E22" stroke="none"/>
+</svg>
