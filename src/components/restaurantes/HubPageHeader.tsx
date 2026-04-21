@@ -1,9 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HubPageHeader() {
   return (
-    <div className="bg-carbon py-12 px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="relative py-12 px-6 overflow-hidden">
+      <Image
+        src="/images/sabor-del-barrio-dark-banner.png"
+        alt=""
+        fill
+        className="object-cover object-center"
+        priority
+      />
+      <div className="absolute inset-0 bg-black/50" />
+      <div className="relative max-w-7xl mx-auto">
         <p className="text-white/40 text-sm font-sans mb-2">
           <Link href="/" className="hover:text-white/70 transition-colors">
             Inicio

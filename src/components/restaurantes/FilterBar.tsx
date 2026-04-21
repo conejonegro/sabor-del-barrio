@@ -5,29 +5,28 @@ import { useRouter, usePathname } from "next/navigation";
 type FilterMode = "latest" | "featured" | "adminPick" | "colonia" | "platillo";
 
 const FILTER_TABS: { value: FilterMode; label: string }[] = [
-  { value: "latest", label: "Últimos" },
-  { value: "featured", label: "Destacados" },
-  { value: "adminPick", label: "Del chef" },
+  // { value: "latest", label: "Últimos" },
+  // { value: "featured", label: "Destacados" },
+  { value: "adminPick", label: "Del chef 10/10" },
   { value: "colonia", label: "Por colonia" },
   { value: "platillo", label: "Por platillo" },
 ];
 
 // Static lists — replace with props from server once Firebase is connected
 const COLONIAS = [
-  { ref: "analco", name: "Analco" },
   { ref: "santa-tere", name: "Santa Tere" },
   { ref: "chapultepec", name: "Chapultepec" },
-  { ref: "tlaquepaque", name: "Tlaquepaque" },
-  { ref: "zapopan-centro", name: "Zapopan Centro" },
+  { ref: "america", name: "América" },
+  { ref: "del-fresno", name: "Del Fresno" },
 ];
 
 const PLATILLOS = [
-  "Birria",
   "Torta ahogada",
-  "Tacos al pastor",
-  "Pozole",
-  "Enchiladas",
-  "Mariscos",
+  "Tacos",
+  // "Birria",
+  // "Pozole",
+  // "Mariscos",
+  // "Cenadurias",
 ];
 
 type Props = {

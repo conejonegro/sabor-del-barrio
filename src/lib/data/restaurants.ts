@@ -116,6 +116,16 @@ export async function getRestaurantsByPlatillo(
   return snap.docs.map((d) => serialize(d.id, d.data()));
 }
 
+export async function getAllRestaurants(): Promise<Restaurant[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("all-restaurants");
+
+  const q = query(col, orderBy("createdAt", "desc"));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => serialize(d.id, d.data()));
+}
+
 export async function getAllRestaurantSlugs(): Promise<{ slug: string }[]> {
   "use cache";
   cacheLife("days");

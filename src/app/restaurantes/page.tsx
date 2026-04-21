@@ -16,6 +16,7 @@ type Props = {
     filter?: string;
     colonia?: string;
     platillo?: string;
+    q?: string;
   }>;
 };
 
