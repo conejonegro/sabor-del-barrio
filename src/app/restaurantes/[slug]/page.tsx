@@ -48,10 +48,10 @@ export default async function RestaurantePage({ params }: Props) {
         )}
         <div className="relative z-10 w-full px-6 pb-6">
           <Link
-            href="/"
+            href="/restaurantes?filter=adminPick"
             className="inline-flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors mb-4"
           >
-            ← Inicio
+            ← Todos los restaurantes
           </Link>
           {restaurant.adminPick && (
             <span className="block w-fit bg-mango text-carbon text-xs font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">
@@ -100,6 +100,29 @@ export default async function RestaurantePage({ params }: Props) {
             ))}
           </div>
         </section>
+
+        {/* Gallery */}
+        {restaurant.photos.length > 0 && (
+          <section>
+            <h2
+              className="text-carbon text-2xl font-bold mb-4"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Galería
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {restaurant.photos.map((photo, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={photo}
+                  alt={`${restaurant.name} foto ${i + 1}`}
+                  className="w-full aspect-square object-cover rounded-xl"
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Details */}
         <section>

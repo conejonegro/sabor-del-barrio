@@ -15,13 +15,13 @@ const FILTER_TABS: { value: FilterMode; label: string }[] = [
 // Static lists — replace with props from server once Firebase is connected
 const COLONIAS = [
   { ref: "santa-tere", name: "Santa Tere" },
-  { ref: "chapultepec", name: "Chapultepec" },
-  { ref: "america", name: "América" },
+  // { ref: "chapultepec", name: "Chapultepec" },
+  // { ref: "america", name: "América" },
   { ref: "del-fresno", name: "Del Fresno" },
 ];
 
 const PLATILLOS = [
-  "Torta ahogada",
+  // "Torta ahogada",
   "Tacos",
   // "Birria",
   // "Pozole",

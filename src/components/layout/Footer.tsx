@@ -3,22 +3,22 @@ import Link from "next/link";
 const EXPLORAR = [
   { label: "Inicio", href: "/" },
   { label: "Restaurantes", href: "/restaurantes" },
-  { label: "Categorías", href: "/categorias" },
-  { label: "Colonias", href: "/colonias" },
 ];
 
-const DESCUBRE = [
-  { label: "Birria", href: "/categorias/birria" },
-  { label: "Tortas Ahogadas", href: "/categorias/tortas-ahogadas" },
-  { label: "Tacos", href: "/categorias/tacos" },
-  { label: "Antojitos", href: "/categorias/antojitos" },
+const COLONIAS = [
+  { label: "Del Fresno", href: "/restaurantes?filter=colonia&colonia=del-fresno" },
+  { label: "Santa Tere", href: "/restaurantes?filter=colonia&colonia=santa-tere" },
+];
+
+const PLATILLOS = [
+  { label: "Tacos", href: "/restaurantes?filter=platillo&platillo=Tacos" },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-carbon text-masa">
       <div className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {/* Col 1 — Brand */}
           <div>
             <span
@@ -55,16 +55,38 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3 — Descubre */}
+          {/* Col 3 — Colonias */}
           <div>
             <h3
               className="text-mango text-xs font-semibold uppercase tracking-wider mb-4"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Descubre
+              Colonias
             </h3>
             <ul className="space-y-1">
-              {DESCUBRE.map(({ label, href }) => (
+              {COLONIAS.map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-masa/70 hover:text-masa transition-colors leading-7"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 4 — Platillos */}
+          <div>
+            <h3
+              className="text-mango text-xs font-semibold uppercase tracking-wider mb-4"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Platillos
+            </h3>
+            <ul className="space-y-1">
+              {PLATILLOS.map(({ label, href }) => (
                 <li key={href}>
                   <Link
                     href={href}
@@ -88,10 +110,10 @@ export default function Footer() {
             <ul className="space-y-1">
               <li>
                 <a
-                  href="mailto:hola@sabordelbarrio.mx"
+                  href="mailto:luisrosalesochoa@proton.me"
                   className="text-sm text-masa/70 hover:text-masa transition-colors leading-7"
                 >
-                  hola@sabordelbarrio.mx
+                  luisrosalesochoa@proton.me
                 </a>
               </li>
               <li>
@@ -112,8 +134,29 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 border-t border-masa/10 pt-6 text-center text-xs text-masa/40 font-sans">
-          © 2026 Sabor del Barrio — Guadalajara, Jalisco
+        <div className="mt-12 border-t border-masa/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-masa/40 font-sans">
+          <span>© 2026 Sabor del Barrio — Guadalajara, Jalisco</span>
+          <span>
+            Desarrollado con ♥ por{" "}
+            <a
+              href="https://www.instagram.com/truelove_ds/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-masa transition-colors"
+            >
+              True Love Design
+            </a>
+            {" · "}
+            Dev{" "}
+            <a
+              href="https://github.com/conejonegro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-masa transition-colors"
+            >
+              conejoNegro
+            </a>
+          </span>
         </div>
       </div>
     </footer>

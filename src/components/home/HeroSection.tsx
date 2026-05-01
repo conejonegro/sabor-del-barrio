@@ -33,7 +33,7 @@ export default function HeroSection() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/restaurantes"
+            href="/restaurantes?filter=adminPick"
             className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-chili text-white font-sans font-semibold text-base hover:bg-chili-light transition-colors duration-200 shadow-lg"
           >
             Explorar Restaurantes
