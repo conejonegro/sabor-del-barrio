@@ -118,7 +118,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://sabor-del-barrio.vercel.app/"
+                  href="https://www.instagram.com/sabordelbarrio_7"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-masa/70 hover:text-masa transition-colors leading-7"
