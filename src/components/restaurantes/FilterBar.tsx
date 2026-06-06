@@ -56,7 +56,7 @@ export default function FilterBar({
           <button
             key={value}
             onClick={() => push(value)}
-            className={`px-4 py-2 rounded-full text-sm font-sans font-medium transition-colors duration-150 ${
+            className={`px-4 py-2 rounded-full text-sm font-sans font-medium transition-colors duration-150 cursor-pointer ${
               activeFilter === value
                 ? "bg-chili text-white"
                 : "border border-adobe/30 text-adobe hover:border-chili hover:text-chili"
@@ -74,7 +74,7 @@ export default function FilterBar({
             <button
               key={ref}
               onClick={() => push("colonia", { colonia: ref })}
-              className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors duration-150 ${
+              className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors duration-150 cursor-pointer ${
                 activeColonia === ref
                   ? "bg-avocado text-white"
                   : "border border-avocado/40 text-avocado hover:bg-avocado/10"
@@ -93,7 +93,7 @@ export default function FilterBar({
             <button
               key={p}
               onClick={() => push("platillo", { platillo: p })}
-              className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors duration-150 ${
+              className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors duration-150 cursor-pointer ${
                 activePlatillo === p
                   ? "bg-mango text-carbon"
                   : "border border-mango/40 text-adobe hover:bg-mango/10"
